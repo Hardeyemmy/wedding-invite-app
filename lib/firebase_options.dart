@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'wedding-app-a56df.firebaseapp.com',
     storageBucket: 'wedding-app-a56df.firebasestorage.app',
   );
+
 }
