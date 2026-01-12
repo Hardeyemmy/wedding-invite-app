@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AppState extends ChangeNotifier {
   AppState() {
@@ -28,5 +29,20 @@ class AppState extends ChangeNotifier {
       }
       notifyListeners();
     });
+  }
+
+  Future<DocumentReference> addMessageToGuestBook(String messaage) {
+    if (!_loggedIn) {
+      throw Exception("You are not logged in");
+    } else {
+      return FirebaseFirestore.instance
+          .collection('guestbook')
+          .add(<String, dynamic>{
+        'text': messaage,
+        'timestamp': DateTime.now(),
+        'name': FirebaseAuth.instance.currentUser!.displayName,
+        'userId': FirebaseAuth.instance.currentUser!.uid,
+      });
+    }
   }
 }

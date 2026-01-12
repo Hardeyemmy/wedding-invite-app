@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'guest_book.dart';
 import 'widgets.dart';
 import 'package:provider/provider.dart';
 import 'app_state.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/pics.jpg', height: 350, width: 350),
+            Image.asset('assets/pics.jpg', height: 200, width: 250),
             const SizedBox(height: 8.0),
             const IconAndText(Icons.calendar_month_rounded, 'Jan 25'),
             const IconAndText(Icons.location_city_sharp, 'Lagos, Nigeria'),
@@ -32,6 +33,19 @@ class HomeScreen extends StatelessWidget {
                     })),
             const SizedBox(height: 8.0),
             const Text('We are getting Married! Be Our Special Guest.'),
+            Consumer<AppState>(
+                builder: (context, auth, _) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (auth.loggedIn) ...[
+                          const Text('Message for the Couple:'),
+                          GuestBook(
+                            addMessages: (message) =>
+                                auth.addMessageToGuestBook(message),
+                          )
+                        ]
+                      ],
+                    ))
           ],
         ),
       ),
