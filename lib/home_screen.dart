@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/pics.jpg', height: 200, width: 250),
+            Image.asset('assets/pics.jpg', height: 100, width: 250),
             const SizedBox(height: 8.0),
             const IconAndText(Icons.calendar_month_rounded, 'Jan 25'),
             const IconAndText(Icons.location_city_sharp, 'Lagos, Nigeria'),
@@ -42,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                           GuestBook(
                             addMessages: (message) =>
                                 auth.addMessageToGuestBook(message),
+                            messages: auth.guestBookMessages,
                           )
                         ]
                       ],
